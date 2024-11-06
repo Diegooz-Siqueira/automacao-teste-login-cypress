@@ -4,17 +4,28 @@ describe('Orange HRM Tests', () => {
     usernameField: "[name='username']", 
     passawordField:"[name='password']",
     submitField: "[type='submit']",
-    topBarField: ".oxd-topbar",
+    dashboardGrind: ".orangehrm-dashboard-grid",
     alertField: "[role='alert']", 
+  }
+
+  const userData = {
+    userSucess: {
+      username: "Admin",
+      password: "admin123"
+    },
+    userFail: {
+      usarname: "xxx",
+      password: "xxx"
+    },
   }
   
   it('Login - Sucess', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')//Visit indica qual o site estou verificando (e qual vamos entrar)
-    cy.get(selectorsList.usernameField).type ('Admin') //O get indica qual o elemento do site que vc irá interagir e o Type, o que irá escrever nesse elemento que está interagindo(campo)
-    cy.get(selectorsList.passawordField).type ('admin123')// Idem ao anterior
+    cy.get(selectorsList.usernameField).type (userData.userSucess.username) //O get indica qual o elemento do site que vc irá interagir e o Type, o que irá escrever nesse elemento que está interagindo(campo)
+    cy.get(selectorsList.passawordField).type (userData.userSucess.password)// Idem ao anterior
     cy.get(selectorsList.submitField).click()//selecionou o botão de entrar com o get e o click indica clicar no botão selecionado pelo get
     cy.location('pathname').should('equal', '/web/index.php/dashboard/index')//Precisamos saber se realmente estamos no local de login, para isso usamos o location para indicar se estamos no pathname correto e copiamos esse patname após o should
-    cy.get (selectorsList.topBarField).contains ('Dashboard')//A última forma que utilizamos para checar se estamos no local correto é verificar na página algum elemento que apareça exclusivamente nessa página, nesse caso a palavra Dashboard, verificando atrá do comando Conatains
+    cy.get (selectorsList.dashboardGrind)//A última forma que utilizamos para checar se estamos no local correto é verificar na página algum elemento que apareça exclusivamente nessa página, nesse caso o método.
   })
   it('Login - Fail', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
