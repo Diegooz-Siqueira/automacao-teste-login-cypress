@@ -1,3 +1,5 @@
+import userData from '../fixtures/users/userData.json'
+
 describe('Orange HRM Tests', () => {
   
   const selectorsList = {
@@ -8,17 +10,6 @@ describe('Orange HRM Tests', () => {
     alertField: "[role='alert']", 
   }
 
-  const userData = {
-    userSucess: {
-      username: "Admin",
-      password: "admin123"
-    },
-    userFail: {
-      usarname: "xxx",
-      password: "xxx"
-    },
-  }
-  
   it('Login - Sucess', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')//Visit indica qual o site estou verificando (e qual vamos entrar)
     cy.get(selectorsList.usernameField).type (userData.userSucess.username) //O get indica qual o elemento do site que vc irá interagir e o Type, o que irá escrever nesse elemento que está interagindo(campo)
